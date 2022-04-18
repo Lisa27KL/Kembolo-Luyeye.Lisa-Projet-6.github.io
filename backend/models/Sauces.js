@@ -8,7 +8,7 @@ const sauceSchema = mongoose.Schema({
     imageUrl: { type: String, required: true},
     heat: { type: Number, required: true},
 
-    // Système de like - dislike
+    // Like - Dislike
     likes: { type: Number, required: true},
     dislikes: { type: Number, required: true},
     usersLiked: { type: [String], required: true},

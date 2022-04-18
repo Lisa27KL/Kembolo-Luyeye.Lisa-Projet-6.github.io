@@ -1,3 +1,4 @@
+// Using Multer for uploading files (images) in this case
 const multer = require('multer');
 
 const MIME_TYPES ={

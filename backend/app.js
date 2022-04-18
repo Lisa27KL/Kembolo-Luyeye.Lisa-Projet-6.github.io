@@ -1,4 +1,6 @@
 const express = require('express');
+const helmet = require('helmet'); // OWASP : Secure Express app by setting various HTTP headers.
+
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -7,14 +9,14 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 
-// Routes récupérées
+// Routers 
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
 
 const app = express();
 
-// Connexion à la base de données
+// Connection with the DataBase MONGODB
 mongoose.connect(process.env.MONGOBD_CONNECTION,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
@@ -23,12 +25,14 @@ mongoose.connect(process.env.MONGOBD_CONNECTION,
 );
 
 app.use(express.json());
+app.use(helmet()); // Configuration des headers
+
 
 // Défis de la semaine l.17 l.23
 //console.log(app.use(express.json()))
 
 
-// CORS
+// CORS Sécurity
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');

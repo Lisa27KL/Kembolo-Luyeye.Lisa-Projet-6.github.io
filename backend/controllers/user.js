@@ -58,12 +58,14 @@ exports.login = (req, res, next) => {
                         userId: user._id,
                         token: jwt.sign(
                             { userId: user._id},
-                            (porcess.env.TOK_SECRET),
+                            (process.env.TOK_SECRET),
                             { expiresIn: '24h'}
                         )
                     });
                 })
-                .catch(error => res.status(500).json({error}));
+                .catch((error) => console.log("Erreur 1" + error)
+                /*res.status(500).json({error})*/);
         })
-        .catch(error => res.status(500).json({error}));
+        .catch((error )=>  console.log("Erreur 2" + error)
+        /*res.status(500).json({error})*/);
 };

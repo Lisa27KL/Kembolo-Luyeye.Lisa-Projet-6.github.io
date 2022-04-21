@@ -7,7 +7,7 @@ module.exports = (req, res, next) =>{
     .then((sauce)=>{
         console.log(sauce)
         const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token,porcess.env.TOK_SECRET);
+        const decodedToken = jwt.verify(token,process.env.TOK_SECRET);
         const userId = decodedToken.userId;
         console.log(userId)
         req.authorization = {userId};

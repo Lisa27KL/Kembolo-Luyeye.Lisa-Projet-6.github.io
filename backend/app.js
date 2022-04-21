@@ -26,7 +26,7 @@ mongoose.connect(process.env.MONGOBD_CONNECTION,
 
 app.use(express.json());
 app.use(helmet()); // Configuration des headers
-
+app.use(helmet.crossOriginResourcePolicy({policy: "cross-origin"}));
 
 // Défis de la semaine l.17 l.23
 //console.log(app.use(express.json()))

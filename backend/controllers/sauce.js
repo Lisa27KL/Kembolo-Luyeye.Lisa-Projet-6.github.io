@@ -22,31 +22,48 @@ exports.createSauce = (req, res, next) => {
   
 
 // Modify a sauce
-exports.modifySauce = (req, res, next) =>{
-    const sauceObject = req. file?
-    { 
-    ...JSON.parse(req.body.sauce),
-    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-
-    } : {...req.body};
-
-    Sauce.updateOne({_id:req.params.id}, {...sauceObject, _id: req.params.id})
-    .then(()=> res.status(200).json({message: 'Sauce Modified !'}))
-    .catch(error => res.status(400).json({error}));
-};
+exports.modifySauce = (req, res, next) => {
+    let sauceObject = {};
+    req.file ? (
+      
+        Sauce.findOne({
+            _id: req.params.id
+        }).then((sauce) => {
+            
+            const filename = sauce.imageUrl.split('/images/')[1]
+            fs.unlinkSync(`images/${filename}`)
+        }),
+        sauceObject = {
+        
+        ...JSON.parse(req.body.sauce),
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,}
+    ) : ( sauceObject = {...req.body})
+    Sauce.updateOne(
+        {_id: req.params.id}, {...sauceObject,_id: req.params.id})
+        .then(() => res.status(200).json({message: 'Sauce modified !'}))
+        .catch((error) => res.status(400).json({error})
+    )
+}
 
 
 // Delete a sauce
 exports.deleteSauce = (req, res, next) =>{
     Sauce.findOne({_id: req.params.id})
     .then((sauce)=> {
+        if(!sauce){
+            return res.status(404).json({error: new Error('Sauce not found')})
+        };
+
+        if(sauce.userId !== req.auth.userId){
+            return res.status(401).json({error: "Unauthorized request !!"})
+        }
         
-    const filename = sauce.imageUrl.split('/images/')[1];
-    fs.unlink(`images/${filename}`, () =>{
-        Sauce.deleteOne({_id:req.params.id})
-        .then(()=> res.status(200).json({message: 'Sauce Deleted !'}))
-        .catch(error => res.status(400).json({error}));
-    });
+        const filename = sauce.imageUrl.split('/images/')[1];
+        fs.unlink(`images/${filename}`, () =>{
+            Sauce.deleteOne({_id:req.params.id})
+            .then(()=> res.status(200).json({message: 'Sauce Deleted !'}))
+            .catch(error => res.status(400).json({error}));
+        });
     
     })
     .catch(error => res.status(500).json({error}));

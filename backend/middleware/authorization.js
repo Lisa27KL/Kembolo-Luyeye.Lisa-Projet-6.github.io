@@ -7,14 +7,12 @@ module.exports = (req, res, next) =>{
     .then((sauce)=>{
         console.log(sauce)
         const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token,'RANDOM_TOKEN_SECRET');
+        const decodedToken = jwt.verify(token,porcess.env.TOK_SECRET);
         const userId = decodedToken.userId;
         console.log(userId)
         req.authorization = {userId};
 
         if(sauce.userId !== userId){
-            console.log(sauce)
-            console.log(userId)
             return res.status(401).json({error: "Unauthorized request !!"});
         
         }else{

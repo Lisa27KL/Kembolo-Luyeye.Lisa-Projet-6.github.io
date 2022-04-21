@@ -63,9 +63,7 @@ exports.login = (req, res, next) => {
                         )
                     });
                 })
-                .catch((error) => console.log("Erreur 1" + error)
-                /*res.status(500).json({error})*/);
+                .catch((error) => res.status(500).json({error}));
         })
-        .catch((error )=>  console.log("Erreur 2" + error)
-        /*res.status(500).json({error})*/);
+        .catch((error )=>  res.status(500).json({error}));
 };

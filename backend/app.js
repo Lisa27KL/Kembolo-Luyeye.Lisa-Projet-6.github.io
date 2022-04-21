@@ -16,7 +16,7 @@ const userRoutes = require('./routes/user');
 const app = express();
 
 // Connection with the DataBase MONGODB
-mongoose.connect(process.env.MONGOBD_CONNECTION,
+mongoose.connect(process.env.MONGODB_CONNECTION,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connection to MongoDB successful!') )

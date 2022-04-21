@@ -10,7 +10,7 @@ Ce Projet nécessite :
 
 1ère Etape : lancer le front-end. 
 Pour se faire, allez dans le dossier frontend, ouvrez son terminal et taper la commande "npm start".
-Laissez le terminal ouvert.
+Laissez le terminal ouvert...
 
 
 Rendez-vous sur http://localhost:4200/.

@@ -1,33 +1,35 @@
-<<<<<<< HEAD
-Projet 6 ~ Piiquante
-avec OPENCLASSROOM
-
-Ce Projet a besoin des installations de :
-=======
-# Projet-6-Kembolo-Luyeye.Lisa.github.io
-
 Projet 6 ~ Piiquante
 avec OPENCLASSROOM
 
 Ce Projet nécessite :
->>>>>>> c6799c7b255034eedb55734e0167f36a2a07eaf4
+
 - Node.js
+- Express.js
 - Angular CLI
 
-1ère Etape : lancer le front-end. 
-Pour se faire, allez dans le dossier frontend, ouvrez son terminal et taper la commande "npm start".
-<<<<<<< HEAD
-Laissez le terminal ouvert.
-=======
-Laissez le terminal ouvert...
->>>>>>> c6799c7b255034eedb55734e0167f36a2a07eaf4
+1ère Etape - Lancer le front-end,pour se faire, dans un premier terminal: 
 
+- Allez dans le dossier front-end : "cd frontend"
+- Tapez la commande "npm install"
+- Puis lancer le server avec "npm start".
+
+Laissez le terminal ouvert...
+
+
+
+Pour la suite vous allez devoir créer un dossier ".env" en suivant l'exemple donné dans ".env.example"
+
+
+2ème Etape - Lancer le back-end,pour se faire, dans un second terminal:
+
+- Allez dans le dossier back-end : "cd backend" 
+- Tapez la commande "npm install"
+- Puis lancer le server avec "nodemon server".
+
+Laissez le terminal ouvert...
+
+Pour se connecter :
 Rendez-vous sur http://localhost:4200/.
-
-2ème Etape : lancer le back-end.
-Pour se faire, allez dans le dossier backend, ouvrez son terminal et taper la commande "nodemon server".
-Laissez le terminal ouvert...
-
 -----------------------------------------------------------------------------------------------------------
 
 Project 6 ~ Piiquante
@@ -35,14 +37,26 @@ with OPENCLASSROOM
 
 This Project requires :
 - Node.js
+- Express.js
 - Angular CLI
 
-Step 1: launch the front-end.
-To do this, go to the frontend folder, open his terminal and type the command "npm start".
+Step 1 - Launch the front-end,to do so, in a first terminal terminal:
+- Go to the folder front-end : "cd frontend"
+- Type the command "npm install"
+- Then start the server with "npm start".
+
 Leave the terminal open...
 
+
+For the next step, you will have to create a folder ".env" following the example given in ".env.example"
+
+
+Step 2 - Launch the back-end, to do so, in a second terminal :
+- Go to the back-end folder: "cd backend"
+- Type the command "npm install"
+- Then start the server with "nodemon server".
+
+Leave the terminal open...
+
+For Connection :
 Go to http://localhost:4200/.
-
-Step 2: launch the back-end.
-To do this, go to the backend folder, open his terminal and type the command "nodemon server".
-Leave the terminal open...

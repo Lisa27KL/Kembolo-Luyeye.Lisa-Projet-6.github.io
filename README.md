@@ -1,26 +1,17 @@
-<<<<<<< HEAD
-Projet 6 ~ Piiquante
-avec OPENCLASSROOM
-
-Ce Projet a besoin des installations de :
-=======
 # Projet-6-Kembolo-Luyeye.Lisa.github.io
 
 Projet 6 ~ Piiquante
 avec OPENCLASSROOM
 
 Ce Projet nécessite :
->>>>>>> c6799c7b255034eedb55734e0167f36a2a07eaf4
+
 - Node.js
 - Angular CLI
 
 1ère Etape : lancer le front-end. 
 Pour se faire, allez dans le dossier frontend, ouvrez son terminal et taper la commande "npm start".
-<<<<<<< HEAD
 Laissez le terminal ouvert.
-=======
-Laissez le terminal ouvert...
->>>>>>> c6799c7b255034eedb55734e0167f36a2a07eaf4
+
 
 Rendez-vous sur http://localhost:4200/.
 

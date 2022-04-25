@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGODB_CONNECTION,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connection to MongoDB successful!') )
-  .catch((error) => console.log('Connection to MongoDB failed...' + error)
+  .catch((error) => console.log(`Connection to MongoDB failed : ${error}`)
 );
 
 app.use(express.json());

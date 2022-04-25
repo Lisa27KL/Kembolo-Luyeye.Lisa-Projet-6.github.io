@@ -13,12 +13,12 @@ module.exports = (req, res, next) =>{
         req.authorization = {userId};
 
         if(sauce.userId !== userId){
-            return res.status(401).json({error: "Unauthorized request !!"});
+            throw " User not Authorized"
         
         }else{
             next();
         }
     })
-    .catch (error => res.status(401).json({error: 'Unauthenticated Request !'}));
+    .catch (error => res.status(404).json({message: error}));
 
 };

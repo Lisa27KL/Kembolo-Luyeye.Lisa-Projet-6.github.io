@@ -11,8 +11,9 @@ module.exports = (req, res, next) =>{
             throw 'Invalid User ID !';
         } else {
             next();
-        }
+        };
+
     } catch (error){
-        res.status(401).json({error: error | ' Invalid request !'});
+        res.status(401).json({message: error || ' Invalid request !'});
     }
 }

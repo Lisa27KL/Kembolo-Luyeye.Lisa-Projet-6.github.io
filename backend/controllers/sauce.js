@@ -67,8 +67,8 @@ exports.deleteSauce = (req, res) => {
 
         })
         .catch(error => res.status(500).json({ message: error }));
-
 };
+
 
 // Display ONE sauce
 exports.getOneSauce = (req, res) => {

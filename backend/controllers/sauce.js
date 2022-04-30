@@ -22,28 +22,32 @@ exports.createSauce = (req, res) => {
 
 
 // Modify a sauce
-exports.modifySauce = (req, res) => {
-    Sauce.findOne({ _id: req.params.id })
-        .then((sauce) => {
-            const filename = sauce.imageUrl.split('/images/')[1];
-            if (req.file) {
-                fs.unlink(`images/${filename}`)
-                const sauceObject = {
-                    ...JSON.parse(req.body.sauce),
-                    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-                }
-            } else {
-                return res.status(404).json({ message: " Sauce not found" })
-            };
+exports.modifySauce = (req, res, next) => {
+    if (req.file) {
+        // If image is modified -> delete the old one
+        Sauce.findOne({ _id: req.params.id })
+            .then(sauce => {
+                const filename = sauce.imageUrl.split('/images/')[1];
+                fs.unlink(`images/${filename}`, () => {
 
-            Sauce.updateOne(
-                { _id: req.params.id }, { ...sauceObject }
-                    .then(() => res.status(200).json({ message: 'Sauce modified !' }))
-                    .catch((error) => res.status(400).json({ message: error }))
-            );
-        })
-        .catch((error) => res.status(400).json({ message: error }))
-}
+                    const sauceObject = {
+                        ...JSON.parse(req.body.sauce),
+                        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+                    }
+                    Sauce.updateOne({ _id: req.params.id }, { ...sauceObject })
+                        .then(() => res.status(200).json({ message: 'Sauce modified !' }))
+                        .catch(error => res.status(400).json({ message: error }));
+                })
+            })
+            .catch(error => res.status(500).json({ message: error }));
+    } else {
+        // If the image is not modified
+        const sauceObject = { ...req.body };
+        Sauce.updateOne({ _id: req.params.id }, { ...sauceObject })
+            .then(() => res.status(200).json({ message: 'Sauce modified !' }))
+            .catch(error => res.status(400).json({ message: error }));
+    }
+};
 
 
 // Delete a sauce

@@ -27,14 +27,7 @@ mongoose.connect(process.env.MONGODB_CONNECTION,
   );
 
 app.use(express.json());
-app.use(helmet()); // Configuration des headers
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-
-app.use(rateLimit({
-  windowMs: 15 * 60 * 1000, //15 minutes
-  max: 20, // Limit each IP à 30 requests per "window" / 15 mins.
-  message: `BEWARE ! Too many connection attempts from this IP`
-}));
+app.use(helmet({crossOriginResourcePolicy: false,}));
 
 // CORS Sécurity
 app.use((req, res, next) => {
@@ -50,5 +43,10 @@ app.use('/api/auth', userRoutes);
 app.use('/api/sauces', sauceRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
+app.use(rateLimit({
+  windowMs: 15 * 60 * 1000, //15 minutes
+  max: 20, // Limit each IP à 30 requests per "window" / 15 mins.
+  message: `BEWARE ! Too many connection attempts from this IP`
+}));
 
 module.exports = app;

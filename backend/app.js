@@ -1,5 +1,6 @@
 const express = require('express');
 const helmet = require('helmet'); // OWASP : Secure Express app by setting various HTTP headers.
+const rateLimit = require('express-rate-limit');
 
 const mongoose = require('mongoose');
 const path = require('path');
@@ -17,16 +18,23 @@ const app = express();
 
 // Connection with the DataBase MONGODB
 mongoose.connect(process.env.MONGODB_CONNECTION,
-  { useNewUrlParser: true,
-    useUnifiedTopology: true })
-  .then(() => console.log('Connection to MongoDB successful!') )
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('Connection to MongoDB successful!'))
   .catch((error) => console.log(`Connection to MongoDB failed : ${error}`)
-);
+  );
 
 app.use(express.json());
 app.use(helmet()); // Configuration des headers
-app.use(helmet.crossOriginResourcePolicy({policy: "cross-origin"}));
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
+app.use(rateLimit({
+  windowMs: 15 * 60 * 1000, //15 minutes
+  max: 20, // Limit each IP à 30 requests per "window" / 15 mins.
+  message: `BEWARE ! Too many connection attempts from this IP`
+}));
 
 // CORS Sécurity
 app.use((req, res, next) => {
